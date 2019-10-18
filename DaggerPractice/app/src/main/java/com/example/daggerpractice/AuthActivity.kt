@@ -15,7 +15,7 @@ class AuthActivity : DaggerAppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_auth)
 
-        println(someString)
+        println()
     }
 
 }

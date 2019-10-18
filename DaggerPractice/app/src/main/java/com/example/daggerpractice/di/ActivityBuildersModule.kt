@@ -4,6 +4,7 @@ import com.example.daggerpractice.AuthActivity
 import dagger.Module
 import dagger.Provides
 import dagger.android.ContributesAndroidInjector
+import javax.inject.Named
 
 @Module
 abstract class ActivityBuildersModule {
@@ -11,13 +12,4 @@ abstract class ActivityBuildersModule {
     @ContributesAndroidInjector
     abstract fun constibuteAuthActivity(): AuthActivity
 
-    @Module
-    companion object {
-
-        @JvmStatic
-        @Provides
-        fun someString(): String {
-            return "this is a test string"
-        }
-    }
 }
