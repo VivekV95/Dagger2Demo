@@ -7,9 +7,7 @@ import java.lang.Exception
 import java.lang.IllegalArgumentException
 import java.lang.RuntimeException
 import javax.inject.Provider
-import javax.inject.Singleton
 
-@Singleton
 class ViewModelFactory
 @Inject constructor(
     private val creators: Map<Class<out ViewModel>, @JvmSuppressWildcards Provider<ViewModel>>
