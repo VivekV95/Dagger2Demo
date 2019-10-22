@@ -13,6 +13,10 @@ class ViewModelFactory
     private val creators: Map<Class<out ViewModel>, @JvmSuppressWildcards Provider<ViewModel>>
 ) : ViewModelProvider.Factory {
 
+    init {
+        val i = 0
+    }
+
     override fun <T : ViewModel?> create(modelClass: Class<T>): T {
         val creator = creators[modelClass] ?: creators.asIterable().firstOrNull {
             modelClass.isAssignableFrom(it.key)

@@ -14,4 +14,5 @@ abstract class AuthViewModelsModule {
     @IntoMap
     @ViewModelKey(AuthViewModel::class)
     abstract fun bindAuthViewModel(authViewModel: AuthViewModel): ViewModel
+
 }

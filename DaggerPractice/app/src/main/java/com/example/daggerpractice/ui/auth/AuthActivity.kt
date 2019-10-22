@@ -28,7 +28,9 @@ class AuthActivity : DaggerAppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_auth)
 
-        viewModel = ViewModelProviders.of(this, viewModelProviderFactory).get(AuthViewModel::class.java)
+        val provider = ViewModelProviders.of(this, viewModelProviderFactory)
+
+        viewModel = provider.get(AuthViewModel::class.java)
 
         setLogo()
     }
