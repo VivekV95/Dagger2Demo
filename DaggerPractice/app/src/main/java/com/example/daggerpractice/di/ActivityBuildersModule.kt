@@ -4,6 +4,7 @@ import com.example.daggerpractice.di.auth.AuthViewModelsModule
 import com.example.daggerpractice.ui.auth.AuthActivity
 import dagger.Module
 import dagger.android.ContributesAndroidInjector
+import javax.inject.Singleton
 
 @Module
 abstract class ActivityBuildersModule {
