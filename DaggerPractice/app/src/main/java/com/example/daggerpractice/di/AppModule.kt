@@ -7,8 +7,11 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.RequestManager
 import com.bumptech.glide.request.RequestOptions
 import com.example.daggerpractice.R
+import com.example.daggerpractice.util.BASE_URL
 import dagger.Module
 import dagger.Provides
+import retrofit2.Retrofit
+import retrofit2.converter.gson.GsonConverterFactory
 import javax.inject.Named
 import javax.inject.Singleton
 
@@ -42,7 +45,15 @@ class AppModule {
             return ContextCompat.getDrawable(application, R.drawable.logo)
         }
 
-
+        @Singleton
+        @Provides @JvmStatic
+        fun provideRetrofitInstance(): Retrofit {
+            return Retrofit
+                .Builder()
+                .baseUrl(BASE_URL)
+                .addConverterFactory(GsonConverterFactory.create())
+                .build()
+        }
 
     }
 
