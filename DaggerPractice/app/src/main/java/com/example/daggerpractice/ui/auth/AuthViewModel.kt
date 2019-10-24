@@ -24,10 +24,19 @@ class AuthViewModel @Inject constructor(val authApi: AuthApi) : ViewModel() {
 
         val source = LiveDataReactiveStreams
             .fromPublisher(authApi.getUser(userId)
+                .onErrorReturn {
+                    User(-1)
+                }
+                .map<AuthResource<User>> { user ->
+                    if (user.id == -1)
+                        AuthResource.Error("Could not authenticate", null)
+                    else
+                        AuthResource.Authenticated(user)
+                }
                 .subscribeOn(Schedulers.io())
             )
-        authUser.addSource(source) {
-   //         authUser.value = it
+        authUser.addSource(source) {user ->
+            authUser.value = user
             authUser.removeSource(source)
         }
     }
