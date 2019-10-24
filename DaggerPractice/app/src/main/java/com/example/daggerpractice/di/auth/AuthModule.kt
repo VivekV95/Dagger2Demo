@@ -12,8 +12,7 @@ class AuthModule {
     companion object {
 
         @Provides @JvmStatic
-        fun provideAuthApi(retrofit: Retrofit): AuthApi {
-            return retrofit.create(AuthApi::class.java)
-        }
+        fun provideAuthApi(retrofit: Retrofit) = retrofit.create(AuthApi::class.java)
+
     }
 }

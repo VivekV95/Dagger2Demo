@@ -23,40 +23,40 @@ class AppModule {
     companion object {
 
         @Singleton
-        @Provides @JvmStatic
-        fun provideRequestOptions(): RequestOptions {
-            return RequestOptions.placeholderOf(R.drawable.white_background)
-                .error(R.drawable.white_background)
-        }
+        @Provides
+        @JvmStatic
+        fun provideRequestOptions() = RequestOptions.placeholderOf(R.drawable.white_background)
+            .error(R.drawable.white_background)
 
         @Singleton
-        @Provides @JvmStatic
+        @Provides
+        @JvmStatic
         fun provideGlideInstance(
             application: Application,
             requestOptions: RequestOptions
-        ): RequestManager {
-            return Glide
+        ) =
+            Glide
                 .with(application)
                 .setDefaultRequestOptions(requestOptions)
-        }
+
 
         @Singleton
-        @Provides @JvmStatic
-        fun provideAppDrawable(application: Application): Drawable? {
-            return ContextCompat.getDrawable(application, R.drawable.logo)
-        }
+        @Provides
+        @JvmStatic
+        fun provideAppDrawable(application: Application) =
+            ContextCompat.getDrawable(application, R.drawable.logo)
+
 
         @Singleton
-        @Provides @JvmStatic
-        fun provideRetrofitInstance(): Retrofit {
-            return Retrofit
+        @Provides
+        @JvmStatic
+        fun provideRetrofitInstance(): Retrofit =
+            Retrofit
                 .Builder()
                 .baseUrl(BASE_URL)
                 .addConverterFactory(GsonConverterFactory.create())
                 .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                 .build()
-        }
-
     }
 
 }
