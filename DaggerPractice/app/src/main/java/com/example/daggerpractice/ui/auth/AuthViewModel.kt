@@ -7,6 +7,7 @@ import androidx.lifecycle.LiveDataReactiveStreams
 import androidx.lifecycle.MediatorLiveData
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModel
+import com.example.daggerpractice.SessionManager
 import com.example.daggerpractice.model.User
 import com.example.daggerpractice.network.auth.AuthApi
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -15,14 +16,15 @@ import javax.inject.Inject
 import javax.inject.Singleton
 
 
-class AuthViewModel @Inject constructor(val authApi: AuthApi) : ViewModel() {
-
-    private val authUser = MediatorLiveData<AuthResource<User>>()
+class AuthViewModel @Inject constructor(val authApi: AuthApi, val sessionManager: SessionManager) :
+    ViewModel() {
 
     fun authenticateWithId(userId: Int) {
-        authUser.value = AuthResource.Loading()
+        sessionManager.authenticateWithId(queryUserId(userId))
+    }
 
-        val source = LiveDataReactiveStreams
+    private fun queryUserId(userId: Int) =
+        LiveDataReactiveStreams
             .fromPublisher(authApi.getUser(userId)
                 .onErrorReturn {
                     User(-1)
@@ -35,12 +37,7 @@ class AuthViewModel @Inject constructor(val authApi: AuthApi) : ViewModel() {
                 }
                 .subscribeOn(Schedulers.io())
             )
-        authUser.addSource(source) {user ->
-            authUser.value = user
-            authUser.removeSource(source)
-        }
-    }
 
-    fun observeUser(): LiveData<AuthResource<User>> = authUser
+    fun observeAuthState(): LiveData<AuthResource<User>> = sessionManager.getAuthUser()
 
 }

@@ -10,5 +10,5 @@ sealed class AuthResource<T>(
 
     class Error<T>(message: String, data: T? = null) : AuthResource<T>(data, message)
 
-    class NotAuthenticated<T>(message: String, data: T? = null): AuthResource<T>(data, message)
+    class NotAuthenticated<T>(data: T? = null): AuthResource<T>(data)
 }

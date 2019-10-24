@@ -53,7 +53,7 @@ class AuthActivity : DaggerAppCompatActivity() {
     }
 
     fun subscribeObservers() {
-        viewModel.observeUser().observe(this, Observer {authResource ->
+        viewModel.observeAuthState().observe(this, Observer {authResource ->
             authResource?.let {
                 when (authResource) {
                     is AuthResource.Loading -> {
