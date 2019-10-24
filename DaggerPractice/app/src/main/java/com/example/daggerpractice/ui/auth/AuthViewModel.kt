@@ -17,19 +17,21 @@ import javax.inject.Singleton
 
 class AuthViewModel @Inject constructor(val authApi: AuthApi) : ViewModel() {
 
-    private val authUser = MediatorLiveData<User>()
+    private val authUser = MediatorLiveData<AuthResource<User>>()
 
     fun authenticateWithId(userId: Int) {
+        authUser.value = AuthResource.Loading()
+
         val source = LiveDataReactiveStreams
             .fromPublisher(authApi.getUser(userId)
                 .subscribeOn(Schedulers.io())
             )
         authUser.addSource(source) {
-            authUser.value = it
+   //         authUser.value = it
             authUser.removeSource(source)
         }
     }
 
-    fun observeUser(): LiveData<User> = authUser
+    fun observeUser(): LiveData<AuthResource<User>> = authUser
 
 }

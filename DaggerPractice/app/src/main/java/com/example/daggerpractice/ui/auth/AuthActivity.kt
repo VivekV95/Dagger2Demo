@@ -4,6 +4,7 @@ import android.graphics.drawable.Drawable
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import android.widget.Toast
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import com.bumptech.glide.RequestManager
@@ -52,12 +53,34 @@ class AuthActivity : DaggerAppCompatActivity() {
     }
 
     fun subscribeObservers() {
-        viewModel.observeUser().observe(this, Observer {
-            it?.let {
-                Log.d("test", "onChanged: ${it.email}")
+        viewModel.observeUser().observe(this, Observer {authResource ->
+            authResource?.let {
+                when (authResource) {
+                    is AuthResource.Loading -> {
+                        showProgressBar(true)
+
+                    }
+                    is AuthResource.Authenticated -> {
+                        showProgressBar(false)
+                        Log.d("test", "User authenticated: ${authResource.data?.email}")
+                    }
+                    is AuthResource.Error -> {
+                        showProgressBar(false)
+                        Toast.makeText(this, "Did you select a number between 1 and 10?", Toast.LENGTH_LONG)
+                            .show()
+                    }
+                    is AuthResource.NotAuthenticated -> {
+                        showProgressBar(false)
+                    }
+                }
             }
         })
     }
+
+    fun showProgressBar(isVisible: Boolean) {
+        progress_bar.visibility = if (isVisible) View.VISIBLE else View.GONE
+    }
+
     fun attemptLogin() {
         if (!user_id_input.text.toString().isNullOrEmpty())
             viewModel.authenticateWithId(user_id_input.text.toString().toInt())
