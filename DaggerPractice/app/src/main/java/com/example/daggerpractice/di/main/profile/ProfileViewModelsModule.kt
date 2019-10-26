@@ -1,4 +1,4 @@
-package com.example.daggerpractice.di.main
+package com.example.daggerpractice.di.main.profile
 
 import androidx.lifecycle.ViewModel
 import com.example.daggerpractice.di.ViewModelKey
@@ -8,7 +8,7 @@ import dagger.Module
 import dagger.multibindings.IntoMap
 
 @Module
-abstract class MainviewModelsModule {
+abstract class ProfileViewModelsModule {
 
     @Binds
     @IntoMap

@@ -7,8 +7,10 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.RequestManager
 import com.bumptech.glide.request.RequestOptions
 import com.example.daggerpractice.R
+import com.example.daggerpractice.SessionManager
 import com.example.daggerpractice.network.auth.AuthApi
 import com.example.daggerpractice.util.BASE_URL
+import dagger.Binds
 import dagger.Module
 import dagger.Provides
 import retrofit2.Retrofit
@@ -18,7 +20,7 @@ import javax.inject.Named
 import javax.inject.Singleton
 
 @Module
-class AppModule {
+abstract class AppModule {
 
     @Module
     companion object {
@@ -58,7 +60,6 @@ class AppModule {
                 .addConverterFactory(GsonConverterFactory.create())
                 .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                 .build()
-
     }
 
 }
