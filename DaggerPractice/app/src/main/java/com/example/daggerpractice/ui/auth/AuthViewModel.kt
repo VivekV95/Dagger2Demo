@@ -16,7 +16,7 @@ import javax.inject.Inject
 import javax.inject.Singleton
 
 
-class AuthViewModel @Inject constructor(val authApi: AuthApi, val sessionManager: SessionManager) :
+class AuthViewModel @Inject constructor(private val authApi: AuthApi, private val sessionManager: SessionManager) :
     ViewModel() {
 
     fun authenticateWithId(userId: Int) {

@@ -7,6 +7,7 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.RequestManager
 import com.bumptech.glide.request.RequestOptions
 import com.example.daggerpractice.R
+import com.example.daggerpractice.network.auth.AuthApi
 import com.example.daggerpractice.util.BASE_URL
 import dagger.Module
 import dagger.Provides
@@ -57,6 +58,7 @@ class AppModule {
                 .addConverterFactory(GsonConverterFactory.create())
                 .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                 .build()
+
     }
 
 }
