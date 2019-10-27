@@ -7,7 +7,7 @@ import com.example.daggerpractice.model.User
 import com.example.daggerpractice.ui.auth.AuthResource
 import javax.inject.Inject
 
-class MainViewModel @Inject constructor(private val sessionManager: SessionManager): ViewModel() {
+class MainViewModel @Inject constructor(val sessionManager: SessionManager): ViewModel() {
 
     fun observeAuthState(): LiveData<AuthResource<User>> = sessionManager.getAuthUser()
 
