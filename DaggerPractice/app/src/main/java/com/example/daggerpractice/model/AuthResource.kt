@@ -1,4 +1,4 @@
-package com.example.daggerpractice.ui.auth
+package com.example.daggerpractice.model
 
 sealed class AuthResource<T>(
     val data: T? = null,

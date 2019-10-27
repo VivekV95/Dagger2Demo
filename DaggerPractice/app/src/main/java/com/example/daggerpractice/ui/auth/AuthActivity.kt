@@ -10,6 +10,7 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import com.bumptech.glide.RequestManager
 import com.example.daggerpractice.R
+import com.example.daggerpractice.model.AuthResource
 import com.example.daggerpractice.ui.main.MainActivity
 import com.example.daggerpractice.viewmodel.ViewModelFactory
 import dagger.android.support.DaggerAppCompatActivity

@@ -9,7 +9,8 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import com.example.daggerpractice.R
 import com.example.daggerpractice.model.User
-import com.example.daggerpractice.ui.auth.AuthResource
+import com.example.daggerpractice.model.AuthResource
+import com.example.daggerpractice.ui.main.MainViewModel
 import com.example.daggerpractice.viewmodel.ViewModelFactory
 import dagger.android.support.DaggerFragment
 import kotlinx.android.synthetic.main.fragment_profile.*
@@ -22,6 +23,8 @@ class ProfileFragment : DaggerFragment() {
 
     lateinit var viewModel: ProfileViewModel
 
+    lateinit var mainViewModel: MainViewModel
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View? {
@@ -31,6 +34,9 @@ class ProfileFragment : DaggerFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         viewModel = ViewModelProviders.of(this, viewModelFactory)[ProfileViewModel::class.java]
+        activity?.let {
+            mainViewModel = ViewModelProviders.of(this, viewModelFactory)[MainViewModel::class.java]
+        }
         subscribeObservers()
     }
 
@@ -41,19 +47,21 @@ class ProfileFragment : DaggerFragment() {
                 when (resource) {
                     is AuthResource.Authenticated -> {
                         resource.data?.let { user ->
+                            mainViewModel.id = user.id
                             setUserDetails(user)
                         }
                     }
                     is AuthResource.Error -> {
+                        mainViewModel.id = null
                         resource.message?.let { message ->
                             setErrorDetails(message)
                         }
                     }
                     is AuthResource.Loading -> {
-
+                        mainViewModel.id = null
                     }
                     is AuthResource.NotAuthenticated -> {
-
+                        mainViewModel.id = null
                     }
                 }
             }

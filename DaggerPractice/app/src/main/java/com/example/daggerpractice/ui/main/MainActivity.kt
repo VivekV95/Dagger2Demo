@@ -9,8 +9,8 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import com.example.daggerpractice.R
 import com.example.daggerpractice.ui.auth.AuthActivity
-import com.example.daggerpractice.ui.auth.AuthResource
-import com.example.daggerpractice.ui.main.profile.ProfileFragment
+import com.example.daggerpractice.model.AuthResource
+import com.example.daggerpractice.ui.main.posts.PostsFragment
 import com.example.daggerpractice.viewmodel.ViewModelFactory
 import dagger.android.support.DaggerAppCompatActivity
 import javax.inject.Inject
@@ -27,8 +27,8 @@ class MainActivity : DaggerAppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         viewModel = ViewModelProviders.of(this, viewModelFactory)[MainViewModel::class.java]
-        testFragment()
         subscribeObservers()
+        testFragment()
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
@@ -49,24 +49,26 @@ class MainActivity : DaggerAppCompatActivity() {
     fun testFragment() {
         supportFragmentManager
             .beginTransaction()
-            .replace(R.id.main_container, ProfileFragment())
+            .replace(R.id.main_container, PostsFragment())
             .commit()
     }
 
     private fun subscribeObservers() {
         viewModel.observeAuthState().observe(this, Observer { authResource ->
             authResource?.let {
-                when (authResource) {
+                when (it) {
                     is AuthResource.Loading -> {
-
+                        viewModel.id = null
                     }
                     is AuthResource.Authenticated -> {
                         Log.d("test", "User authenticated: ${authResource.data?.email}")
+                        viewModel.id = it.data?.id
                     }
                     is AuthResource.Error -> {
-
+                        viewModel.id = null
                     }
                     is AuthResource.NotAuthenticated -> {
+                        viewModel.id = null
                         navLoginScreen()
                     }
                 }
