@@ -2,10 +2,12 @@ package com.example.daggerpractice.di.main.posts
 
 import androidx.lifecycle.ViewModel
 import com.example.daggerpractice.di.ViewModelKey
+import com.example.daggerpractice.ui.main.posts.PostsRecyclerAdapter
 import com.example.daggerpractice.ui.main.posts.PostsViewModel
 import com.example.daggerpractice.ui.main.profile.ProfileViewModel
 import dagger.Binds
 import dagger.Module
+import dagger.Provides
 import dagger.multibindings.IntoMap
 
 @Module

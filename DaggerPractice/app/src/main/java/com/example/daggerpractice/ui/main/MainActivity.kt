@@ -3,8 +3,10 @@ package com.example.daggerpractice.ui.main
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
+import android.view.Gravity
 import android.view.Menu
 import android.view.MenuItem
+import androidx.core.view.GravityCompat
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import com.example.daggerpractice.R
@@ -12,10 +14,26 @@ import com.example.daggerpractice.ui.auth.AuthActivity
 import com.example.daggerpractice.model.AuthResource
 import com.example.daggerpractice.ui.main.posts.PostsFragment
 import com.example.daggerpractice.viewmodel.ViewModelFactory
+import com.google.android.material.navigation.NavigationView
 import dagger.android.support.DaggerAppCompatActivity
+import kotlinx.android.synthetic.main.activity_main.*
 import javax.inject.Inject
 
-class MainActivity : DaggerAppCompatActivity() {
+class MainActivity : DaggerAppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
+
+    override fun onNavigationItemSelected(menuItem: MenuItem): Boolean {
+        when (menuItem.itemId) {
+            R.id.nav_profile -> {
+
+            }
+            R.id.nav_posts -> {
+
+            }
+        }
+        menuItem.isChecked = true
+        drawer_layout.closeDrawer(GravityCompat.START)
+        return true
+    }
 
     @Inject
     lateinit var viewModelFactory: ViewModelFactory

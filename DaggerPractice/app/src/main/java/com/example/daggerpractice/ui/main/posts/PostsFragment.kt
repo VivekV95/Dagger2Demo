@@ -2,19 +2,24 @@ package com.example.daggerpractice.ui.main.posts
 
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.LinearLayout
 import android.widget.Toast
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
+import androidx.recyclerview.widget.LinearLayoutManager
 
 import com.example.daggerpractice.R
 import com.example.daggerpractice.model.AuthResource
+import com.example.daggerpractice.model.Resource
 import com.example.daggerpractice.ui.main.MainViewModel
 import com.example.daggerpractice.viewmodel.ViewModelFactory
 import dagger.android.support.DaggerFragment
+import kotlinx.android.synthetic.main.fragment_posts.*
 import javax.inject.Inject
 
 /**
@@ -28,6 +33,9 @@ class PostsFragment : DaggerFragment() {
     lateinit var viewModel: PostsViewModel
 
     lateinit var mainViewModel: MainViewModel
+
+    @Inject
+    lateinit var postsRecyclerAdapter: PostsRecyclerAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -43,6 +51,7 @@ class PostsFragment : DaggerFragment() {
             mainViewModel = ViewModelProviders.of(it, viewModelFactory)[MainViewModel::class.java]
         }
         subscribeObservers()
+        initRecyclerView()
     }
 
     private fun subscribeObservers() {
@@ -54,12 +63,28 @@ class PostsFragment : DaggerFragment() {
                         viewModel.observePosts(id).removeObservers(viewLifecycleOwner)
                         viewModel.observePosts(id)
                             .observe(viewLifecycleOwner, Observer { listResource ->
-                                listResource.data?.let {
-                                    val i = 0
+                                when (listResource){
+                                    is Resource.Loading -> {
+                                        Log.d("test", "Loading")
+                                    }
+                                    is Resource.Success -> {
+                                        listResource.data?.let {postsRecyclerAdapter.setPosts(it)}
+                                    }
+                                    is Resource.Error -> {
+                                        Log.e("test", "Error")
+                                    }
                                 }
                             })
                     }
             })
+        }
+    }
+
+    private fun initRecyclerView() {
+        recycler_view.apply {
+            setHasFixedSize(true)
+            layoutManager = LinearLayoutManager(activity)
+            adapter = postsRecyclerAdapter
         }
     }
 

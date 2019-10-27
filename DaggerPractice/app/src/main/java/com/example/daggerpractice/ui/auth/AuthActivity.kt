@@ -43,19 +43,19 @@ class AuthActivity : DaggerAppCompatActivity() {
         setLogo()
     }
 
-    fun setLogo() {
+    private fun setLogo() {
         requestManager
             .load(logo)
             .into(login_logo)
     }
 
-    fun setClickLsteners() {
+    private fun setClickLsteners() {
         login_button.setOnClickListener {
             attemptLogin()
         }
     }
 
-    fun subscribeObservers() {
+    private fun subscribeObservers() {
         viewModel.observeAuthState().observe(this, Observer {authResource ->
             authResource?.let {
                 when (it) {
@@ -81,11 +81,11 @@ class AuthActivity : DaggerAppCompatActivity() {
         })
     }
 
-    fun showProgressBar(isVisible: Boolean) {
+    private fun showProgressBar(isVisible: Boolean) {
         progress_bar.visibility = if (isVisible) View.VISIBLE else View.GONE
     }
 
-    fun attemptLogin() {
+    private fun attemptLogin() {
         if (!user_id_input.text.toString().isNullOrEmpty())
             viewModel.authenticateWithId(user_id_input.text.toString().toInt())
     }
