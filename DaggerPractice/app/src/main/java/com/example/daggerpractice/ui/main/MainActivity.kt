@@ -46,14 +46,14 @@ class MainActivity : DaggerAppCompatActivity() {
         return super.onOptionsItemSelected(item)
     }
 
-    fun testFragment() {
+    fun testFragment() =
         supportFragmentManager
             .beginTransaction()
             .replace(R.id.main_container, PostsFragment())
             .commit()
-    }
 
-    private fun subscribeObservers() {
+
+    private fun subscribeObservers() =
         viewModel.observeAuthState().observe(this, Observer { authResource ->
             authResource?.let {
                 when (it) {
@@ -74,12 +74,12 @@ class MainActivity : DaggerAppCompatActivity() {
                 }
             }
         })
-    }
 
-    private fun navLoginScreen() {
+
+    private fun navLoginScreen() =
         Intent(this, AuthActivity::class.java).apply {
             startActivity(this)
             finish()
         }
-    }
+
 }

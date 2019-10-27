@@ -11,10 +11,9 @@ class MainViewModel @Inject constructor(val sessionManager: SessionManager): Vie
 
     var id: Int? = null
 
-    fun observeAuthState(): LiveData<AuthResource<User>> = sessionManager.getAuthUser()
+    fun observeAuthState() = sessionManager.getAuthUser()
 
-    fun logOut() {
-        sessionManager.logOut()
-    }
+    fun logOut() = sessionManager.logOut()
+
 
 }
