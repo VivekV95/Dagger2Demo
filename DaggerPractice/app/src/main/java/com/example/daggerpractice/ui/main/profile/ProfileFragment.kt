@@ -21,9 +21,9 @@ class ProfileFragment : DaggerFragment() {
     @Inject
     lateinit var viewModelFactory: ViewModelFactory
 
-    lateinit var viewModel: ProfileViewModel
+    private lateinit var viewModel: ProfileViewModel
 
-    lateinit var mainViewModel: MainViewModel
+    private lateinit var mainViewModel: MainViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
@@ -42,7 +42,7 @@ class ProfileFragment : DaggerFragment() {
 
     private fun subscribeObservers() {
         viewModel.observeAuthState().removeObservers(viewLifecycleOwner)
-        viewModel.observeAuthState().observe(this, Observer { authResource ->
+        viewModel.observeAuthState().observe(viewLifecycleOwner, Observer { authResource ->
             authResource?.let { resource ->
                 when (resource) {
                     is AuthResource.Authenticated -> {

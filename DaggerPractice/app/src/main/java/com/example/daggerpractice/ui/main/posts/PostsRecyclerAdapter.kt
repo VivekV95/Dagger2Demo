@@ -11,7 +11,7 @@ import com.example.daggerpractice.R
 
 class PostsRecyclerAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
-    private var posts: List<Post> = ArrayList()
+    private var posts: List<Post> = arrayListOf()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         val view = LayoutInflater.from(parent.context)

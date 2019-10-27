@@ -24,6 +24,11 @@ import javax.inject.Inject
 
 class MainActivity : DaggerAppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
 
+    @Inject
+    lateinit var viewModelFactory: ViewModelFactory
+
+    lateinit var viewModel: MainViewModel
+
     override fun onNavigationItemSelected(menuItem: MenuItem): Boolean {
         when (menuItem.itemId) {
             R.id.nav_profile -> {
@@ -53,11 +58,6 @@ class MainActivity : DaggerAppCompatActivity(), NavigationView.OnNavigationItemS
             .findNavController(this, R.id.nav_host_fragment_container)
             .currentDestination
             ?.id
-
-    @Inject
-    lateinit var viewModelFactory: ViewModelFactory
-
-    lateinit var viewModel: MainViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

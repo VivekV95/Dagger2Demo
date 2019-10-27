@@ -6,6 +6,7 @@ import com.example.daggerpractice.SessionManager
 import com.example.daggerpractice.model.User
 import com.example.daggerpractice.model.AuthResource
 import javax.inject.Inject
+import javax.inject.Singleton
 
 class MainViewModel @Inject constructor(val sessionManager: SessionManager): ViewModel() {
 
