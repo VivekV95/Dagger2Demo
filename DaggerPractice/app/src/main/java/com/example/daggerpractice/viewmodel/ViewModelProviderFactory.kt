@@ -9,7 +9,6 @@ import java.lang.RuntimeException
 import javax.inject.Provider
 import javax.inject.Singleton
 
-@Singleton
 @Suppress("UNCHECKED_CAST")
 class ViewModelFactory @Inject constructor (
     val creators: Map<Class<out ViewModel>, @JvmSuppressWildcards Provider<ViewModel>>

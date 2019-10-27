@@ -3,8 +3,6 @@ package com.example.daggerpractice.di
 import android.app.Application
 import com.example.daggerpractice.BaseApplication
 import com.example.daggerpractice.SessionManager
-import com.example.daggerpractice.di.auth.AuthModule
-import com.example.daggerpractice.di.main.MainModule
 import dagger.BindsInstance
 import dagger.Component
 import dagger.android.AndroidInjector
@@ -16,10 +14,7 @@ import javax.inject.Singleton
     modules = [
         AndroidSupportInjectionModule::class,
         ActivityBuildersModule::class,
-        AppModule::class,
-        ViewModelModule::class,
-        AuthModule::class,
-        MainModule::class
+        AppModule::class
     ]
 )
 interface AppComponent : AndroidInjector<BaseApplication> {
