@@ -9,15 +9,21 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import com.example.daggerpractice.R
-import com.example.daggerpractice.model.User
 import com.example.daggerpractice.model.AuthResource
+import com.example.daggerpractice.model.User
+import com.example.daggerpractice.ui.main.MainActivity
 import com.example.daggerpractice.ui.main.MainViewModel
 import com.example.daggerpractice.viewmodel.ViewModelFactory
-import dagger.android.support.DaggerFragment
 import kotlinx.android.synthetic.main.fragment_profile.*
 import javax.inject.Inject
 
 class ProfileFragment : Fragment() {
+
+    val profileComponent by lazy {
+        (activity as MainActivity)
+            .mainComponent
+            .profileComponent()
+    }
 
     @Inject
     lateinit var viewModelFactory: ViewModelFactory
@@ -25,6 +31,11 @@ class ProfileFragment : Fragment() {
     private lateinit var viewModel: ProfileViewModel
 
     private lateinit var mainViewModel: MainViewModel
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        profileComponent.inject(this)
+        super.onCreate(savedInstanceState)
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?

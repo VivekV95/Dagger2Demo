@@ -3,7 +3,6 @@ package com.example.daggerpractice.di.main
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.example.daggerpractice.di.ViewModelKey
-import com.example.daggerpractice.di.scope.AuthScope
 import com.example.daggerpractice.di.scope.MainScope
 import com.example.daggerpractice.ui.main.MainViewModel
 import com.example.daggerpractice.viewmodel.ViewModelFactory

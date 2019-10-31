@@ -10,16 +10,21 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import com.bumptech.glide.RequestManager
+import com.example.daggerpractice.BaseApplication
 import com.example.daggerpractice.R
 import com.example.daggerpractice.model.AuthResource
 import com.example.daggerpractice.ui.main.MainActivity
 import com.example.daggerpractice.viewmodel.ViewModelFactory
-import dagger.android.support.DaggerAppCompatActivity
 import kotlinx.android.synthetic.main.activity_auth.*
 import javax.inject.Inject
 
 class AuthActivity : AppCompatActivity() {
 
+    private val authComponent by lazy {
+        (application as BaseApplication)
+            .appComponent
+            .authComponent()
+    }
 
     @Inject
     lateinit var viewModelProviderFactory: ViewModelFactory
@@ -34,6 +39,7 @@ class AuthActivity : AppCompatActivity() {
     lateinit var requestManager: RequestManager
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        authComponent.inject(this)
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_auth)
 

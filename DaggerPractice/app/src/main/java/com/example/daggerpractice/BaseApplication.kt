@@ -1,10 +1,13 @@
 package com.example.daggerpractice
 
 import android.app.Application
-import dagger.android.AndroidInjector
-import dagger.android.support.DaggerApplication
-import javax.inject.Inject
-
+import com.example.daggerpractice.di.DaggerAppComponent
 class BaseApplication : Application() {
 
+    val appComponent by lazy {
+        DaggerAppComponent
+            .builder()
+            .bindApplication(this)
+            .build()
+    }
 }

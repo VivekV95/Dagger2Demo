@@ -3,22 +3,18 @@ package com.example.daggerpractice.ui.main.posts
 
 import android.os.Bundle
 import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.LinearLayout
-import android.widget.Toast
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
-
 import com.example.daggerpractice.R
-import com.example.daggerpractice.model.AuthResource
 import com.example.daggerpractice.model.Resource
+import com.example.daggerpractice.ui.main.MainActivity
 import com.example.daggerpractice.ui.main.MainViewModel
 import com.example.daggerpractice.viewmodel.ViewModelFactory
-import dagger.android.support.DaggerFragment
 import kotlinx.android.synthetic.main.fragment_posts.*
 import javax.inject.Inject
 
@@ -26,6 +22,12 @@ import javax.inject.Inject
  * A simple [Fragment] subclass.
  */
 class PostsFragment : Fragment() {
+
+    private val postsComponent by lazy {
+        (activity as MainActivity)
+            .mainComponent
+            .postsComponent()
+    }
 
     @Inject
     lateinit var viewModelFactory: ViewModelFactory
@@ -36,6 +38,11 @@ class PostsFragment : Fragment() {
 
     @Inject
     lateinit var postsRecyclerAdapter: PostsRecyclerAdapter
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        postsComponent.inject(this)
+        super.onCreate(savedInstanceState)
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,

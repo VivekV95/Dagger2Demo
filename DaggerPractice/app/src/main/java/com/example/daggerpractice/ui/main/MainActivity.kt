@@ -3,7 +3,6 @@ package com.example.daggerpractice.ui.main
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
-import android.view.Gravity
 import android.view.Menu
 import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
@@ -13,18 +12,22 @@ import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.NavOptions
 import androidx.navigation.Navigation
 import androidx.navigation.ui.NavigationUI
+import com.example.daggerpractice.BaseApplication
 import com.example.daggerpractice.R
-import com.example.daggerpractice.ui.auth.AuthActivity
 import com.example.daggerpractice.model.AuthResource
-import com.example.daggerpractice.ui.main.posts.PostsFragment
+import com.example.daggerpractice.ui.auth.AuthActivity
 import com.example.daggerpractice.viewmodel.ViewModelFactory
 import com.google.android.material.navigation.NavigationView
-import dagger.android.support.DaggerAppCompatActivity
 import kotlinx.android.synthetic.main.activity_main.*
 import javax.inject.Inject
 
 class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
 
+    val mainComponent by lazy {
+        (application as BaseApplication)
+            .appComponent
+            .mainComponent()
+    }
     @Inject
     lateinit var viewModelFactory: ViewModelFactory
 
@@ -61,6 +64,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
             ?.id
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        mainComponent.inject(this)
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 

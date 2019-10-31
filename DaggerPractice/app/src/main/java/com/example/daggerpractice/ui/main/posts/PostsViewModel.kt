@@ -1,12 +1,12 @@
 package com.example.daggerpractice.ui.main.posts
 
-import android.util.Log
-import androidx.lifecycle.*
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.LiveDataReactiveStreams
+import androidx.lifecycle.MediatorLiveData
+import androidx.lifecycle.ViewModel
 import com.example.daggerpractice.SessionManager
-import com.example.daggerpractice.model.AuthResource
 import com.example.daggerpractice.model.Post
 import com.example.daggerpractice.model.Resource
-import com.example.daggerpractice.model.User
 import com.example.daggerpractice.network.main.MainApi
 import io.reactivex.schedulers.Schedulers
 import javax.inject.Inject

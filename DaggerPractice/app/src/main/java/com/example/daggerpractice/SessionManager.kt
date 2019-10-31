@@ -3,8 +3,8 @@ package com.example.daggerpractice
 import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MediatorLiveData
-import com.example.daggerpractice.model.User
 import com.example.daggerpractice.model.AuthResource
+import com.example.daggerpractice.model.User
 import javax.inject.Inject
 import javax.inject.Singleton
 

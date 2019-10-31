@@ -1,12 +1,12 @@
 package com.example.daggerpractice.ui.main.posts
 
-import com.example.daggerpractice.model.Post
-import android.widget.TextView
-import androidx.recyclerview.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
+import androidx.recyclerview.widget.RecyclerView
 import com.example.daggerpractice.R
+import com.example.daggerpractice.model.Post
 
 
 class PostsRecyclerAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {

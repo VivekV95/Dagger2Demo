@@ -1,13 +1,9 @@
 package com.example.daggerpractice.viewmodel
 
 import androidx.lifecycle.ViewModel
-import javax.inject.Inject
 import androidx.lifecycle.ViewModelProvider
-import java.lang.Exception
-import java.lang.IllegalArgumentException
-import java.lang.RuntimeException
+import javax.inject.Inject
 import javax.inject.Provider
-import javax.inject.Singleton
 
 @Suppress("UNCHECKED_CAST")
 class ViewModelFactory @Inject constructor (
