@@ -25,7 +25,7 @@ import javax.inject.Inject
 /**
  * A simple [Fragment] subclass.
  */
-class PostsFragment : DaggerFragment() {
+class PostsFragment : Fragment() {
 
     @Inject
     lateinit var viewModelFactory: ViewModelFactory

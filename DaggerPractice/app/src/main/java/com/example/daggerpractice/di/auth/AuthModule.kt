@@ -16,6 +16,5 @@ class AuthModule {
         @JvmStatic
         @AuthScope
         fun provideAuthApi(retrofit: Retrofit) = retrofit.create(AuthApi::class.java)
-
     }
 }

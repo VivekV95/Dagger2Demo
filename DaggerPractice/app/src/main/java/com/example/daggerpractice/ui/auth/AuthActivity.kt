@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import com.bumptech.glide.RequestManager
@@ -17,7 +18,7 @@ import dagger.android.support.DaggerAppCompatActivity
 import kotlinx.android.synthetic.main.activity_auth.*
 import javax.inject.Inject
 
-class AuthActivity : DaggerAppCompatActivity() {
+class AuthActivity : AppCompatActivity() {
 
 
     @Inject

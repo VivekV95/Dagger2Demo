@@ -1,32 +1,40 @@
 package com.example.daggerpractice.di
 
 import android.app.Application
-import com.example.daggerpractice.BaseApplication
-import com.example.daggerpractice.SessionManager
+import com.example.daggerpractice.di.auth.AuthComponent
+import com.example.daggerpractice.di.auth.AuthModule
+import com.example.daggerpractice.di.auth.AuthViewModelModule
+import com.example.daggerpractice.di.main.MainComponent
+import com.example.daggerpractice.di.main.MainModule
+import com.example.daggerpractice.di.main.MainViewModelModule
 import dagger.BindsInstance
 import dagger.Component
-import dagger.android.AndroidInjector
-import dagger.android.support.AndroidSupportInjectionModule
 import javax.inject.Singleton
 
 @Singleton
 @Component(
     modules = [
-        AndroidSupportInjectionModule::class,
-        ActivityBuildersModule::class,
         AppModule::class
     ]
 )
-interface AppComponent : AndroidInjector<BaseApplication> {
-
-    fun sessionManager(): SessionManager
+interface AppComponent {
 
     @Component.Builder
     interface Builder {
 
         @BindsInstance
-        fun application(application: Application): Builder
+        fun bindApplication(application: Application): Builder
 
         fun build(): AppComponent
     }
+
+    fun authComponent(
+        authModule: AuthModule,
+        authViewModelModule: AuthViewModelModule
+    ): AuthComponent
+
+    fun mainComponent(
+        mainModule: MainModule,
+        mainViewModelModule: MainViewModelModule
+    ): MainComponent
 }

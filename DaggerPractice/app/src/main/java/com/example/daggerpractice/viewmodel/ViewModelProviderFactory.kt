@@ -17,7 +17,6 @@ class ViewModelFactory @Inject constructor (
     init {
         val i = 0
     }
-
     override fun <T : ViewModel?> create(modelClass: Class<T>): T {
         val creator = creators[modelClass] ?: creators.asIterable().firstOrNull {
             modelClass.isAssignableFrom(it.key)
