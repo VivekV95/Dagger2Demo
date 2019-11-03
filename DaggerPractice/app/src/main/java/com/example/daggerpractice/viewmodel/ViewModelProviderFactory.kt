@@ -1,5 +1,6 @@
 package com.example.daggerpractice.viewmodel
 
+import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import javax.inject.Inject
@@ -11,7 +12,7 @@ class ViewModelFactory @Inject constructor (
 ) : ViewModelProvider.Factory {
 
     init {
-        val i = 0
+        Log.d("vmf", "ViewModelFactory instantiated")
     }
     override fun <T : ViewModel?> create(modelClass: Class<T>): T {
         val creator = creators[modelClass] ?: creators.asIterable().firstOrNull {

@@ -14,10 +14,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 import javax.inject.Singleton
 
 @Module
-abstract class AppModule {
-
-    @Module
-    companion object {
+object AppModule {
 
         @Singleton
         @Provides
@@ -54,6 +51,4 @@ abstract class AppModule {
                 .addConverterFactory(GsonConverterFactory.create())
                 .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                 .build()
-    }
-
 }

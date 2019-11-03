@@ -24,13 +24,7 @@ interface AppComponent {
         fun build(): AppComponent
     }
 
-    fun authComponent(
-        //authModule: AuthModule,
-        //authViewModelModule: AuthViewModelModule
-    ): AuthComponent
+    fun authComponent(): AuthComponent
 
-    fun mainComponent(
-       // mainModule: MainModule,
-        //mainViewModelModule: MainViewModelModule
-    ): MainComponent
+    fun mainComponent(): MainComponent
 }
